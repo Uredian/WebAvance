@@ -3,7 +3,9 @@ const express = require('express'),
     productsController = require('../controllers/products.js');
     console.log(productsController)
     //productsController.findAll()
-router.get("/",productsController.findAll)
+router.get("/a",productsController.findAll)
+router.get("/decrement/:id/:nombreDePizza",productsController.decrementQuantity)
+router.get("/:id",productsController.FindById)
 
 // router.route('/:id')
 //     .get(userController.getUser);

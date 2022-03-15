@@ -16,7 +16,27 @@ const findAll = (req,res) => {
 	})
 }
 
-module.exports={findAll}
+const decrementQuantity= (req,res) => {
+	console.log("Decrementation")
+	Product.decrementQuantity(req.params.id,req.params.nombreDePizza,function(err,product){
+		if(err){
+			res.send(err)
+		}
+		res.send(product)
+	})
+}
+
+const FindById = (req,res) => {
+	console.log("FindById")
+	Product.FindById(req.params.id,function(err,product){
+		if(err){
+			res.send(err)
+		}
+		res.send(product)
+	})
+}
+
+module.exports={findAll,decrementQuantity,FindById}
 
 
 

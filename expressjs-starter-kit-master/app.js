@@ -20,7 +20,7 @@ const db = require('./models/db');
 app.use("/produits",routes)
 
 app.listen(port,()=> {
-    console.log("server is listening on port ${port}");
+    console.log("server is listening on port : ",port);
 })
 
 module.exports = app;
