@@ -10,8 +10,14 @@ import Products from "./pages/Products";
 import ShoppingCart from "./pages/ShoppingCart";
 import NoPage from "./pages/NoPage";
 import Layout from "./pages/Layout";
-
+import { useCookies } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie';
 export default function App() {
+  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+
+  function onChange(newName) {
+    setCookie('name', newName, { path: '/' });
+  }
   return (
   <BrowserRouter>
   <Routes>
@@ -26,11 +32,13 @@ export default function App() {
   );
  }
 
-  
+
 ReactDOM.render(
+  <CookiesProvider>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </CookiesProvider>,
   document.getElementById('root')
 );
 
