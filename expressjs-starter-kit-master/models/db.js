@@ -1,8 +1,13 @@
-const mongoose = require('mongoose');
+const mysql = require('mysql');
+const dbConn = mysql.createConnection(
+  {  host     : 'localhost', 
+  user     : 'user', 
+  password : 'azerty', 
+  database : 'web'});
 
-mongoose.set('useCreateIndex', true); // This pervent collection.ensureIndex depreciation warning
-mongoose.set('useFindAndModify', false); // This prevent current mongoose depreciation warning
-mongoose.connect('mongodb://localhost/starterkit', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+  dbConn.connect(
+    function(err) { 
+       if (err) throw err;
+       console.log("Database Connected!");
+      });
+module.exports = dbConn;

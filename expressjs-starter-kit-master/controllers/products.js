@@ -1,6 +1,37 @@
-const mongoose = require('mongoose');
+
+// Récuperation du model 
+const Product = require('../models/products.js');
+
+//On exporte findall
+const findAll = (req,res) => {
+	Product.findAll(function(err,product){
+		console.log("controller")
+		if(err){
+			res.send(err);
+		}
+
+		console.log("res",product)
+		res.send(product)
+	})
+}
+
+module.exports={findAll}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const indexUser = (_req, res, next) => {
+
 	// Retrieve all users from Mongo
 	mongoose.model('Users').find({}, (error, users) => {
 		if (error) {
