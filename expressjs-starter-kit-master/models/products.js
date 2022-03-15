@@ -9,7 +9,7 @@ var Products = function (product){
 }
 
 Products.findAll = function ( result ){
-	let query=dbConn.query("SELECT * FROM Web",function(err,res){
+	let query=dbConn.query("SELECT * FROM Produit",function(err,res){
 		if (err){
 			console.log("error = ",err)
 			result(null,err)

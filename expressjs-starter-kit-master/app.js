@@ -8,7 +8,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get("/",(req,res)=>{
-    res.send("COUCOU");
+    
+    res.send("test");
 })
 
 const routes=require("./routes/products.js")
