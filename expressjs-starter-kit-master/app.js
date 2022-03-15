@@ -12,15 +12,17 @@ app.get("/",(req,res)=>{
     res.send("test");
 })
 
-const routes=require("./routes/products.js")
+const routes_produits=require("./routes/products.js")
+const routes_commands=require("./routes/commands.js")
 
 // Load DB connection
 const db = require('./models/db');
 
-app.use("/produits",routes)
+app.use("/produits",routes_produits)
+app.use("/commandes",routes_commands)
 
 app.listen(port,()=> {
-    console.log("server is listening on port ${port}");
+    console.log("server is listening on port : ",port);
 })
 
 module.exports = app;

@@ -1,11 +1,11 @@
 const express = require('express'),
     router = express.Router(),
-    productsController = require('../controllers/products.js');
-    console.log(productsController)
-    //productsController.findAll()
-router.get("/a",productsController.findAll)
-router.get("/decrement/:id/:nombreDePizza",productsController.decrementQuantity)
-router.get("/:id",productsController.FindById)
+    commandsController = require('../controllers/commands.js');
+
+router.get("/a",commandsController.findAll)
+router.post("/",commandsController.create)
+//router.get("/:id",commandsController.FindById)
+
 
 // router.route('/:id')
 //     .get(userController.getUser);

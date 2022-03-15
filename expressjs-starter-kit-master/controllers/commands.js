@@ -1,42 +1,49 @@
 
 // Récuperation du model 
-const Product = require('../models/products.js');
+const Command = require('../models/commands.js');
+
+
+const create = (req,res)=> {
+    console.log(req)
+    const nouvelle_commande = new Command(req.body);
+    if( req.body.constructor == Object && Object.keys(req.body).length === 0){
+        res.status(400).send({error:true,message:"Please provide all filed"})
+    }
+    else{
+        Command.create(nouvelle_commande,function(err,commande){
+            if(err){
+                res.send(err);
+            }
+            res.json({error:false,message:"Commande bien ajoutée ! ",data:commande})
+        })
+    }
+}
 
 //On exporte findall
 const findAll = (req,res) => {
-	console.log(Product)
-	Product.findAll(function(err,product){
+	console.log(Command)
+	Command.findAll(function(err,commande){
 		console.log("controller")
 		if(err){
 			res.send(err);
 		}
 
-		console.log("res",product)
-		res.send(product)
-	})
-}
-
-const decrementQuantity= (req,res) => {
-	console.log("Decrementation")
-	Product.decrementQuantity(req.params.id,req.params.nombreDePizza,function(err,product){
-		if(err){
-			res.send(err)
-		}
-		res.send(product)
+		console.log("res",commande)
+		res.send(commande)
 	})
 }
 
 const FindById = (req,res) => {
 	console.log("FindById")
-	Product.FindById(req.params.id,function(err,product){
+	Command.FindById(req.params.id,function(err,commande){
 		if(err){
 			res.send(err)
 		}
-		res.send(product)
+		res.send(commande)
 	})
 }
 
-module.exports={findAll,decrementQuantity,FindById}
+module.exports={findAll,FindById,create}
 
 
 
