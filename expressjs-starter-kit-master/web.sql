@@ -1,9 +1,3 @@
-Appel à l'API : 
-
-localhost:3000/produits/a : voir tous les produits 
-localhost:3000/produits/id_du_produit : voir un produit spécifique
-localhost:3000/produits/decrement/id_du_produit/nb_de_pizza_a_decrementer
-
 -- Adminer 4.8.1 MySQL 8.0.28-0ubuntu0.20.04.3 dump
 
 SET NAMES utf8;
@@ -42,6 +36,8 @@ CREATE TABLE `Produit` (
   PRIMARY KEY (`Reference`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `Produit` (`Reference`, `Titre`, `Description`, `Prix`, `Quantite`, `Image`) VALUES
+(123,	'Pizza',	'Pizza 4 fromages',	23,	6,	'https://i0.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2017/06/3234_Pizza.jpg?resize=895%2C616&ssl=1');
 
 DROP TABLE IF EXISTS `Utilisateur`;
 CREATE TABLE `Utilisateur` (
@@ -57,4 +53,4 @@ CREATE TABLE `Utilisateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
--- 2022-03-16 07:39:14
+-- 2022-03-16 07:41:03

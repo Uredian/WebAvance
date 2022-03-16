@@ -1,13 +1,14 @@
 
 // Récuperation du model 
 const Command = require('../models/commands.js');
+const Product = require('../models/products.js');
 
 
 const create = (req,res)=> {
     console.log(req)
     const nouvelle_commande = new Command(req.body);
     if( req.body.constructor == Object && Object.keys(req.body).length === 0){
-        res.status(400).send({error:true,message:"Please provide all filed"})
+        res.send({error:true,message:"Please provide all filed"})
     }
     else{
         Command.create(nouvelle_commande,function(err,commande){
