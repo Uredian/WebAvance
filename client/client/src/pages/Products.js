@@ -8,10 +8,9 @@ function Products() {
         function addToCart(reference) {
             let productIndex = products.findIndex((product) => product.reference === reference);
             const tab = [...products];
-
+            
             if (cookies[reference] === undefined) {
                 setCookie(reference, 1, { path: "/" });
-                console.log(cookies[reference]);
             }
             else {
                 let value = parseInt(cookies[reference]);
@@ -20,6 +19,7 @@ function Products() {
 
             tab[productIndex].quantite = tab[productIndex].quantite - 1;
             setProducts(tab);
+            
         };
         return (
             <div className="Product_list" id={object.reference}>
@@ -37,17 +37,17 @@ function Products() {
 
     async function getProducts() {
         try {
-            let res = await fetch("localhost:3001/products");
+            let res = await fetch("http://localhost:3001/produits/a");
             return setProducts(res);
         } catch (error) {
             console.error(error);
         }
     };
     //const products = getProducts();
-    const [products, setProducts] = useState([{ reference: 1, titre: "Pizza test", description: "Ceci est un test", prix: "4euros", quantite: 3 }, { reference: 2, titre: "Autre test", description: "Ceci est un test", prix: "4euros", quantite: 3 }]);
-
+    const [products, setProducts] = useState(0);
+    getProducts();
     return (
-        <div className="Nopage">
+        <div className="ProductsPage">
             <p>
                 Here are our available pizzas :
             </p>
