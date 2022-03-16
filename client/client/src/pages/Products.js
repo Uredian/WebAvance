@@ -1,51 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import { useCookies } from 'react-cookie';
 function Products() {
+
     function Product(product) {
         let object = product.product
         const [cookies, setCookie, removeCookie] = useCookies(["cart"]);
-        function addToCart(reference) {
-            let productIndex = products.findIndex((product) => product.reference === reference);
+
+        function addToCart(Reference) {
+            let productIndex = products.findIndex((product) => product.Reference === Reference);
             const tab = [...products];
-            
-            if (cookies[reference] === undefined) {
-                setCookie(reference, 1, { path: "/" });
+
+            if (cookies[Reference] === undefined) {
+                setCookie(Reference, 1, { path: "/" });
             }
             else {
-                let value = parseInt(cookies[reference]);
-                setCookie(reference, value + 1, { path: "/" });
+                let value = parseInt(cookies[Reference]);
+                setCookie(Reference, value + 1, { path: "/" });
             }
 
-            tab[productIndex].quantite = tab[productIndex].quantite - 1;
+            tab[productIndex].Quantite = tab[productIndex].Quantite - 1;
             setProducts(tab);
-            
         };
+
         return (
-            <div className="Product_list" id={object.reference}>
-                <p>{object.titre}</p><br />
-                <p>Description : {object.description}</p><br />
-                <p>Prix : {object.prix}</p><br />
-                <p className='Quantity' id={object.reference}>Quantité restante : {object.quantite}</p><br />
-                <button onClick={() => addToCart(object.reference)}>Ajouter au panier</button>
+            <div className="Product_list" id={object.Reference}>
+                <p>{object.Titre}</p><br />
+                <img src={object.Image}/>
+                <p>Description : {object.Description}</p><br />
+                <p>Prix : {object.Prix}</p><br />
+                <p className='Quantity' id={object.Reference}>Quantité restante : {object.Quantite}</p><br />
+                <button onClick={() => addToCart(object.Reference)}>Ajouter au panier</button>
             </div>
         )
     }
 
-
-
-
     async function getProducts() {
+
         try {
             let res = await fetch("http://localhost:3001/produits/a");
-            return setProducts(res);
+            res = await res.json()
+            let products = [];
+            for (let prod in res) {
+                console.log(res[prod]);
+                products.push(res[prod]);
+            }
+            console.log(products)
+            return setProducts(products);
         } catch (error) {
             console.error(error);
         }
     };
-    //const products = getProducts();
-    const [products, setProducts] = useState(0);
-    getProducts();
+
+    const [products, setProducts] = useState([]);
+    useEffect(() => { getProducts() }, []);
+
     return (
         <div className="ProductsPage">
             <p>
@@ -53,7 +62,7 @@ function Products() {
             </p>
             <div className='Products'>
                 {products.map((product) => {
-                    return <Product key={product.reference} product={product} />
+                    return <Product key={product.Reference} product={product} />
                 })}
             </div>
 
