@@ -6,6 +6,7 @@ var Products = function (product){
 	this.Description = product.Description;
 	this.Prix=product.Prix;
 	this.Quantité = product.Quantité;
+	this.Image=product.Image;
 }
 
 Products.findAll = function (result){

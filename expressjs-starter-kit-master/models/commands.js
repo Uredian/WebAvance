@@ -4,7 +4,6 @@ var Commands = function (command){
 	this.Id=command.Id;
     this.Utilisateur=command.Utilisateur;
     this.ListeProduits=command.ListeProduits;
-    this.Valide=command.Valide;
 }
 
 Commands.create = function ( newcommmands, result){
