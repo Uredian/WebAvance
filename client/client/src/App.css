@@ -36,6 +36,12 @@ input:hover,button:hover{
   background-color: #75b1c0;
 }
 
+.Product_list img{
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+}
+
 .App-body {
   background-color: #282c34;
   min-height: 85vh;
@@ -69,4 +75,7 @@ input:hover,button:hover{
   padding: 10vh;
   padding-top: 1vh;
   padding-bottom: 1vh;
+}
+.Product_list p{
+  margin : 0;
 }

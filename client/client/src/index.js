@@ -13,31 +13,31 @@ import Layout from "./pages/Layout";
 import { useCookies } from 'react-cookie';
 import { CookiesProvider } from 'react-cookie';
 export default function App() {
-  const [cookies, setCookie, removeCookie] = useCookies(['cart']);
+  const [cookies, setCookie] = useCookies(['cart']);
 
   function onChange(newName) {
     setCookie('name', newName, { path: '/' });
   }
   return (
-  <BrowserRouter>
-  <Routes>
-  <Route path="/" element={<Layout />}>
-  <Route index element={<Home />} />
-  <Route path="shoppingcart" element={<ShoppingCart />} />
-  <Route path="products" element={<Products />} />
-  <Route path="*" element={<NoPage />} />
-  </Route>
-  </Routes>
-  </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="shoppingcart" element={<ShoppingCart />} />
+          <Route path="products" element={<Products />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
- }
+}
 
 
 ReactDOM.render(
   <CookiesProvider>
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </CookiesProvider>,
   document.getElementById('root')
 );
