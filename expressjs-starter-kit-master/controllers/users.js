@@ -1,68 +1,39 @@
 
 // Récuperation du model 
-const Command = require('../models/commands.js');
-const Product = require('../models/products.js');
+const Users = require('../models/users.js');
+
 
 
 const create = (req, res) => {
 	console.log(req)
-	const nouvelle_commande = new Command(req.body);
+	const nouvel_utlisateur = new Users(req.body);
 	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
 		res.send({ error: true, message: "Please provide all filed" })
 	}
 	else {
-		Command.create(nouvelle_commande, function (err, commande) {
+		Users.create(nouvel_utlisateur, function (err, user) {
 			if (err) {
 				res.send(err);
-				console.log("erreur de creation de commande")
+				console.log("erreur de creation de utilisateur")
 			}
 			else {
-				json_commande = JSON.parse(commande["ListeProduits"])
- 
-				if(Object.keys(json_commande).length == 0){
-					res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
-				}
-				else{
-					Object.keys(json_commande).forEach(function (key) {
-					var value = json_commande[key]
-
-					Product.decrementQuantity(key, value, function (err, product) {
-						if (err) {
-							res.json({ error: true, message: "Erreur lors de l'ajout de votre commande ! ", data: commande })
-							console.log("erreur plus de pizza")
-						}
-						else {
-							res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
-						}
-
-
-
-					})
-				})
-				}
-				
-				
+                res.json({ error: false, message: "User bien ajouté ! ", data: user })
 			}
-
-
-
-
-
 		})
 	}
 }
 
 //On exporte findall
 const findAll = (req, res) => {
-	console.log(Command)
-	Command.findAll(function (err, commande) {
+	console.log(Users)
+	Users.findAll(function (err, user) {
 		console.log("controller")
 		if (err) {
 			res.send(err);
 		}
 		else {
-			console.log("res", commande)
-			res.send(commande)
+			console.log("res", user)
+			res.send(user)
 		}
 
 
@@ -71,12 +42,12 @@ const findAll = (req, res) => {
 
 const FindById = (req, res) => {
 	console.log("FindById")
-	Command.FindById(req.params.id, function (err, commande) {
+	Users.FindById(req.params.id, function (err, user) {
 		if (err) {
 			res.send(err)
 		}
 		else {
-			res.send(commande)
+			res.send(user)
 		}
 
 	})
