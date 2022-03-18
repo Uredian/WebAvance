@@ -10,9 +10,12 @@ const findAll = (req,res) => {
 		if(err){
 			res.send(err);
 		}
-
-		console.log("res",product)
+		else{
+			console.log("res",product)
 		res.send(product)
+		}
+
+		
 	})
 }
 
@@ -22,7 +25,10 @@ const decrementQuantity= (req,res) => {
 		if(err){
 			res.send(err)
 		}
-		res.send(product)
+		else{
+			res.send(product)
+		}
+		
 	})
 }
 
@@ -32,7 +38,10 @@ const FindById = (req,res) => {
 		if(err){
 			res.send(err)
 		}
-		res.send(product)
+		else{
+			res.send(product)
+		}
+		
 	})
 }
 

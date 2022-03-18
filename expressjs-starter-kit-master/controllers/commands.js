@@ -4,47 +4,85 @@ const Command = require('../models/commands.js');
 const Product = require('../models/products.js');
 
 
-const create = (req,res)=> {
-    console.log(req)
-    const nouvelle_commande = new Command(req.body);
-    if( req.body.constructor == Object && Object.keys(req.body).length === 0){
-        res.send({error:true,message:"Please provide all filed"})
-    }
-    else{
-        Command.create(nouvelle_commande,function(err,commande){
-            if(err){
-                res.send(err);
-            }
-            res.json({error:false,message:"Commande bien ajoutée ! ",data:commande})
-        })
-    }
+const create = (req, res) => {
+	console.log(req)
+	const nouvelle_commande = new Command(req.body);
+	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
+		res.send({ error: true, message: "Please provide all filed" })
+	}
+	else {
+		Command.create(nouvelle_commande, function (err, commande) {
+			if (err) {
+				res.send(err);
+				console.log("erreur de creation de commande")
+			}
+			else {
+				json_commande = JSON.parse(commande["ListeProduits"])
+				
+				if(Object.keys(json_commande).length == 0){
+					res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
+				}
+				else{
+					Object.keys(json_commande).forEach(function (key) {
+					var value = json_commande[key]
+
+					Product.decrementQuantity(key, value, function (err, product) {
+						if (err) {
+							res.json({ error: true, message: "Erreur lors de l'ajout de votre commande ! ", data: commande })
+							console.log("erreur plus de pizza")
+						}
+						else {
+							res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
+						}
+
+
+
+					})
+				})
+				}
+				
+				
+			}
+
+
+
+
+
+		})
+	}
 }
 
 //On exporte findall
-const findAll = (req,res) => {
+const findAll = (req, res) => {
 	console.log(Command)
-	Command.findAll(function(err,commande){
+	Command.findAll(function (err, commande) {
 		console.log("controller")
-		if(err){
+		if (err) {
 			res.send(err);
 		}
+		else {
+			console.log("res", commande)
+			res.send(commande)
+		}
 
-		console.log("res",commande)
-		res.send(commande)
+
 	})
 }
 
-const FindById = (req,res) => {
+const FindById = (req, res) => {
 	console.log("FindById")
-	Command.FindById(req.params.id,function(err,commande){
-		if(err){
+	Command.FindById(req.params.id, function (err, commande) {
+		if (err) {
 			res.send(err)
 		}
-		res.send(commande)
+		else {
+			res.send(commande)
+		}
+
 	})
 }
 
-module.exports={findAll,FindById,create}
+module.exports = { findAll, FindById, create }
 
 
 
