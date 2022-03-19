@@ -6,7 +6,9 @@ const Product = require('../models/products.js');
 
 const create = (req, res) => {
 	console.log(req)
+	console.log(req.body)
 	const nouvelle_commande = new Command(req.body);
+	
 	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
 		res.send({ error: true, message: "Please provide all filed" })
 	}
@@ -34,20 +36,10 @@ const create = (req, res) => {
 						else {
 							res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
 						}
-
-
-
 					})
 				})
 				}
-				
-				
 			}
-
-
-
-
-
 		})
 	}
 }

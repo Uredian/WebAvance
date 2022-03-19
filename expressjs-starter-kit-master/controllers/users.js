@@ -1,12 +1,19 @@
 
 // Récuperation du model 
 const Users = require('../models/users.js');
+const Command = require('../models/commands.js');
+const Product = require('../models/products.js');
+commandsController = require('../controllers/commands.js');
 
 
 
 const create = (req, res) => {
-	console.log(req)
+	console.log(typeof req)
 	const nouvel_utlisateur = new Users(req.body);
+	
+	ListeProduits=req.body["ListeProduits"]
+	
+	console.log(ListeProduits)
 	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
 		res.send({ error: true, message: "Please provide all filed" })
 	}
@@ -17,7 +24,9 @@ const create = (req, res) => {
 				console.log("erreur de creation de utilisateur")
 			}
 			else {
-                res.json({ error: false, message: "User bien ajouté ! ", data: user })
+				commandsController.create({"body":{"Utilisateur":user.Id,"ListeProduits":ListeProduits,"user":user}},res)
+				//res.json({ error: false, message: "User bien ajouté ! ", data: user })
+				
 			}
 		})
 	}
