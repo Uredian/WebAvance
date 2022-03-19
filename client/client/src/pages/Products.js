@@ -5,13 +5,13 @@ function Products() {
 
     function Product(product) {
         let object = product.product
-        const [cookies, setCookie, removeCookie] = useCookies(["cart"]);
+        const [cookies, setCookie] = useCookies(["cart"]);
 
         function addToCart(Reference) {
             let productIndex = products.findIndex((product) => product.Reference === Reference);
             const tab = [...products];
 
-            if (cookies[Reference] === undefined) {
+            if (cookies[Reference] === undefined || isNaN(cookies[Reference])) {
                 setCookie(Reference, 1, { path: "/" });
             }
             else {

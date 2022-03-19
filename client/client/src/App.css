@@ -103,3 +103,6 @@ input:hover,button:hover{
   background-color: #687da5;
   border-radius: 20%;
 }
+#dummyFrame {
+  display: none;
+}
