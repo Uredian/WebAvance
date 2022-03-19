@@ -12,8 +12,12 @@ Commands.create = function ( newcommmands, result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		console.log("NOUVELLE COMMMANDE :",res.insertId)
-		result(null,res.insertId)
+		else{
+			newcommmands.Id=res.insertId
+		result(null,newcommmands)
+		}
+		
+		
 	})
 }
 
@@ -24,8 +28,11 @@ Commands.findAll = function (result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		console.log("Commande :",res)
+		else{
+			console.log("Commande :",res)
 		result(null,res)
+		}
+		
 	})
 }
 
@@ -37,7 +44,10 @@ Commands.FindById= function (id,result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		result(null,res)
+		else{
+			result(null,res)
+		}
+		
 	})
 }
 

@@ -15,8 +15,11 @@ Products.findAll = function (result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		console.log("PRODUIT :",res)
+		else{
+			//console.log("PRODUIT :",res)
 		result(null,res)
+		}
+		
 	})
 }
 
@@ -27,17 +30,36 @@ Products.decrementQuantity = function (id,nombre_de_pizza,result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		
-		quantite_actuelle=res[0].Quantite
-		console.log("Quantite :",quantite_actuelle,"Nombre de pizza choisi :",nombre_de_pizza,"Donc",quantite_actuelle-nombre_de_pizza)
-		let query=dbConn.query("UPDATE Produit SET Quantite=? WHERE Reference=?",[quantite_actuelle-nombre_de_pizza,id],function(err,res){
-			if (err){
-				console.log("error = ",err)
-				result(null,err)
+		else{
+
+			quantite_actuelle=res[0].Quantite
+		quantite_apres_soustration=quantite_actuelle-nombre_de_pizza
+
+			if(quantite_apres_soustration<=0){
+				result("error plus de pizza !!",null)
 			}
-			console.log("PRODUIT :",res)
-			result(null,res)
-		})
+			else{
+				console.log("Quantite :",quantite_actuelle,"Nombre de pizza choisi :",nombre_de_pizza,"Donc",quantite_actuelle-nombre_de_pizza)
+			let query=dbConn.query("UPDATE Produit SET Quantite=? WHERE Reference=?",[quantite_apres_soustration,id],function(err,res){
+				if (err){
+					console.log("error = ",err)
+					result(null,err)
+				}
+				else{
+					//console.log("PRODUIT :",res)
+				result(null,res)
+				}
+				
+			})
+
+
+			}
+			
+
+		}
+		
+		
+		
 	})
 
 	
@@ -49,7 +71,10 @@ Products.FindById= function (id,result){
 			console.log("error = ",err)
 			result(null,err)
 		}
-		result(null,res)
+		else{
+			result(null,res)
+		}
+		
 	})
 }
 

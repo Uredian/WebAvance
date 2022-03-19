@@ -1,51 +1,59 @@
 
 // Récuperation du model 
-const Product = require('../models/products.js');
+const Users = require('../models/users.js');
+
+
+
+const create = (req, res) => {
+	console.log(req)
+	const nouvel_utlisateur = new Users(req.body);
+	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
+		res.send({ error: true, message: "Please provide all filed" })
+	}
+	else {
+		Users.create(nouvel_utlisateur, function (err, user) {
+			if (err) {
+				res.send(err);
+				console.log("erreur de creation de utilisateur")
+			}
+			else {
+                res.json({ error: false, message: "User bien ajouté ! ", data: user })
+			}
+		})
+	}
+}
 
 //On exporte findall
-const findAll = (req,res) => {
-	console.log(Product)
-	Product.findAll(function(err,product){
+const findAll = (req, res) => {
+	console.log(Users)
+	Users.findAll(function (err, user) {
 		console.log("controller")
-		if(err){
+		if (err) {
 			res.send(err);
 		}
-		else{
-			console.log("res",product)
-		res.send(product)
+		else {
+			console.log("res", user)
+			res.send(user)
 		}
 
-		
+
 	})
 }
 
-const decrementQuantity= (req,res) => {
-	console.log("Decrementation")
-	Product.decrementQuantity(req.params.id,req.params.nombreDePizza,function(err,product){
-		if(err){
-			res.send(err)
-		}
-		else{
-			res.send(product)
-		}
-		
-	})
-}
-
-const FindById = (req,res) => {
+const FindById = (req, res) => {
 	console.log("FindById")
-	Product.FindById(req.params.id,function(err,product){
-		if(err){
+	Users.FindById(req.params.id, function (err, user) {
+		if (err) {
 			res.send(err)
 		}
-		else{
-			res.send(product)
+		else {
+			res.send(user)
 		}
-		
+
 	})
 }
 
-module.exports={findAll,decrementQuantity,FindById}
+module.exports = { findAll, FindById, create }
 
 
 
