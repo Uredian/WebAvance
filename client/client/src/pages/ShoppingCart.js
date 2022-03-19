@@ -11,7 +11,7 @@ function ShoppingCart() {
         return (
             <div className="Product_list" id={object.Reference}>
                 <p>{object.Titre}</p><br />
-                <img src={object.Image}/>
+                <img src={object.Image} alt={object.Titre}/>
                 <p>Description : {object.Description}</p><br />
                 <p>Prix total : {parseInt(object.Prix) * parseInt(props.cartQuantity)}</p><br />
                 <p className='Quantity' id={object.Reference}>Quantité dans le panier : {props.cartQuantity}</p><br />
@@ -19,7 +19,7 @@ function ShoppingCart() {
         )
     }
 
-    const [cookies, setCookie] = useCookies("cart");
+    const [cookies] = useCookies("cart");
     const [productsInCart,setProductsInCart] = useState([]);
 
     async function getProductsinCart() {
@@ -46,8 +46,8 @@ function ShoppingCart() {
                     })}
                 </div>
             </div>
-            <form action="/">
-                <input type="submit" value="Proceed to payment" />
+            <form action="/order">
+                <input type="submit" className="paymentButton" value="Proceed to payment" />
             </form>
         </div>
     );

@@ -76,6 +76,30 @@ input:hover,button:hover{
   padding-top: 1vh;
   padding-bottom: 1vh;
 }
+
+.App-body .Products{
+  display: flex;
+  justify-content :space-evenly;
+}
+
+.App-body .CartItems{
+  display: flex;
+  justify-content :space-evenly;
+}
 .Product_list p{
   margin : 0;
+}
+
+.paymentButton{
+  background-color: #6496a3;
+  border-radius: 2vh;
+  font-size: calc(10px + 5vmin);
+}
+.paymentButton:hover{
+  background-color: #75b1c0;
+}
+
+.orderForm {
+  background-color: #687da5;
+  border-radius: 20%;
 }
