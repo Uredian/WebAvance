@@ -41,7 +41,7 @@ User.create = function (newuser, result) {
 }
 
 //Method to find a user by id
-User.FindById = function (id, result) {
+User.findById = function (id, result) {
 	let query_get_quantity = dbConn.query("SELECT * FROM Utilisateur WHERE Id=?", [id], function (error, response) {
 		if (error) {
 			console.log("error = ", error)

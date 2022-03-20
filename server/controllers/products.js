@@ -31,7 +31,7 @@ const decrementQuantity = (req, res) => {
 const findById = (req, res) => {
 	Product.findById(req.params.id, function (error, product_response) {
 		if (error) {
-			res.send(err)
+			res.send(error)
 		}
 		else {
 			console.log("Result of findAll Product", product_response)

@@ -38,7 +38,7 @@ Order.findAll = function (result) {
 
 
 //Method to find an order by id
-Order.FindById = function (id, result) {
+Order.findById = function (id, result) {
 	let query_get_quantity = dbConn.query("SELECT * FROM Commande WHERE id=?", [id], function (error, response) {
 		if (error) {
 			console.log("error = ", error)

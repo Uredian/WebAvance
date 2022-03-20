@@ -5,7 +5,7 @@ const express = require('express'),
     //productsController.findAll()
 router.get("/a",productsController.findAll)
 router.get("/decrement/:id/:numberOfPizzasToBeDecremented",productsController.decrementQuantity)
-router.get("/:id",productsController.FindById)
+router.get("/:id",productsController.findById)
 
 // router.route('/:id')
 //     .get(userController.getUser);
