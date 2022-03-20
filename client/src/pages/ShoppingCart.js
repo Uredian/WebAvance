@@ -26,7 +26,7 @@ function ShoppingCart() {
         let tab = []
         for (let product in cookies) {
             if (!isNaN(cookies[product])) {
-                let prod = await fetch("http://localhost:3001/produits/" + product);
+                let prod = await fetch("http://localhost:3001/products/" + product);
                 prod = await prod.json();
                 tab.push(prod[0]);
             }

@@ -26,7 +26,7 @@ function Products() {
         return (
             <div className="Product_list" id={object.Reference}>
                 <p>{object.Titre}</p><br />
-                <img src={object.Image}/>
+                <img src={object.Image} alt={object.Titre} />
                 <p>Description : {object.Description}</p><br />
                 <p>Prix : {object.Prix}</p><br />
                 <p className='Quantity' id={object.Reference}>Quantité restante : {object.Quantite}</p><br />
@@ -38,14 +38,12 @@ function Products() {
     async function getProducts() {
 
         try {
-            let res = await fetch("http://localhost:3001/produits/a");
+            let res = await fetch("http://localhost:3001/products/");
             res = await res.json()
             let products = [];
             for (let prod in res) {
-                console.log(res[prod]);
                 products.push(res[prod]);
             }
-            console.log(products)
             return setProducts(products);
         } catch (error) {
             console.error(error);

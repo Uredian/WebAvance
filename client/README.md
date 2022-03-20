@@ -1,4 +1,15 @@
-# Getting Started with Create React App
+# PizzaLoca Client Part
+
+### Definition
+This part corresponds to the client part of the "PizzaLoca" web project.
+This client will allow you to :
+-navigate through the pages of the website using the top buttons.
+-view the products available on the Products page, and add pizzas to your cart.
+-view your shopping cart in the Shopping Cart page, and access the payment page.
+-fill a form to give information for creating your order.
+
+### Tech
+This client uses [react.js] library to work properly
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -1,19 +1,41 @@
 import '../App.css';
 import { useCookies } from "react-cookie";
+import { useEffect } from "react";
 
 function Order() {
     const [cookies, removeCookie] = useCookies("cart");
+
     function redirect() {
         alert("Commande traitée !");
         window.location.href = "/"
     }
-    var render = (
+
+    function createProductList() {
+        let json = {}
+        for (let cookie in cookies) {
+            if (!isNaN(cookies[cookie])) {
+                json[cookie] = cookies[cookie];
+            }
+        }
+        json = JSON.stringify(json);
+        return json;
+    }
+
+    function removeCookies() {
+        for (let val in cookies) {
+            removeCookie(val);
+        }
+    };
+
+    useEffect(() => { return removeCookies() });
+
+    return (
         <div className="OrderPage">
             <p>
                 Please complete the following form to help us deliver your pizzas !<br />
             </p>
-            <iframe name='dummyFramed' id='dummyFramed'></iframe>
-            <form className='orderForm' method='POST' action='http://localhost:3001/utilisateurs/create' id='orderForm' target='dummyFramed'>
+            <iframe name='dummyFrame' id='dummyFrame' title='dummyFrame'></iframe>
+            <form className='orderForm' method='POST' action='http://localhost:3001/users/create' id='orderForm' target='dummyFrame'>
                 <label htmlFor="Nom">Last Name :</label><br />
                 <input type="text" id="Nom" name="Nom"></input><br /><br />
                 <label htmlFor="Prenom">First Name :</label><br />
@@ -28,15 +50,11 @@ function Order() {
                 <input type="text" id="Ville" name="Ville"></input><br /><br />
                 <label htmlFor="Code_postal">Postal Code :</label><br />
                 <input type="text" id="Code_postal" name="Code_postal"></input><br /><br />
-                <input type="hidden" id='ListeProduits' name='ListeProduits' value={cookies}/>
-                <input type="submit" value="Submit Information" onClick={()=>redirect()}></input>
+                <input type="hidden" id='ListeProduits' name='ListeProduits' value={createProductList()} />
+                <input type="submit" value="Submit Information" onClick={() => redirect()}></input>
             </form>
         </div>
     );
-    for (let val in cookies) {
-        removeCookie(val);
-    }
-    return render;
 }
 
 export default Order;

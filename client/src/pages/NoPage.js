@@ -1,7 +1,6 @@
-import logo from '../logo.svg';
 import '../App.css';
 
-function NoPages() {
+function NoPage() {
   return (
     <div className="Nopage">
         <p>
@@ -12,4 +11,4 @@ function NoPages() {
   );
 }
 
-export default NoPages;
+export default NoPage;
