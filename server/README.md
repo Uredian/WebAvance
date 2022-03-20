@@ -3,13 +3,13 @@
 ### Definition
 This part corresponds to the server part of the "PizzaLoca" web project.
 This server will allow : 
-- retrieve the list of all the pizzas with their quantities, prices, representations and descriptions by following the following url => http://localhost:3001/products/a
-- retrieve information about a pizza => http://localhost:3001/produits/id_de_la_pizza
-- create a user and create an order by making a POST request => http://localhost:3001/utilisateurs/create
-- to see the information relative to a user by following the following url =>  http://localhost:3001/utilisateurs/id_utilisateur
-- to get the list and information of all users => http://localhost:3001/utilisateurs/a
-- to get the list and the information of all the commands => http://localhost:3001/commandes/a
-- to see the information about an order by following this url =>  http://localhost:3001/commandes/id_commande
+- retrieve the list of all the pizzas with their quantities, prices, representations and descriptions by following the following url => http://localhost:3001/products/
+- retrieve information about a pizza => http://localhost:3001/products/id_de_la_pizza
+- create a user and create an order by making a POST request => http://localhost:3001/users/create
+- to see the information relative to a user by following the following url =>  http://localhost:3001/users/id_utilisateur
+- to get the list and information of all users => http://localhost:3001/users/
+- to get the list and the information of all the commands => http://localhost:3001/orders/
+- to see the information about an order by following this url =>  http://localhost:3001/orders/id_commande
 
 ### Tech
 

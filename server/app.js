@@ -21,9 +21,9 @@ const routes_users=require("./routes/users.js")
 // Load DB connection
 const db = require('./models/db');
 
-app.use("/produits",routes_produits)
-app.use("/commandes",routes_commandes)
-app.use("/utilisateurs",routes_users)
+app.use("/products",routes_produits)
+app.use("/orders",routes_commandes)
+app.use("/users",routes_users)
 
 app.listen(port,()=> {
     console.log("server is listening on port : ",port);
