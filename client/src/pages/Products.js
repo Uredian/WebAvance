@@ -10,17 +10,17 @@ function Products() {
         function addToCart(Reference) {
             let productIndex = products.findIndex((product) => product.Reference === Reference);
             const tab = [...products];
-
-            if (cookies[Reference] === undefined || isNaN(cookies[Reference])) {
-                setCookie(Reference, 1, { path: "/" });
+            if (tab[productIndex].Quantite > 0) {
+                if (cookies[Reference] === undefined || isNaN(cookies[Reference])) {
+                    setCookie(Reference, 1, { path: "/" });
+                }
+                else {
+                    let value = parseInt(cookies[Reference]);
+                    setCookie(Reference, value + 1, { path: "/" });
+                }
+                tab[productIndex].Quantite = tab[productIndex].Quantite - 1;
+                setProducts(tab);
             }
-            else {
-                let value = parseInt(cookies[Reference]);
-                setCookie(Reference, value + 1, { path: "/" });
-            }
-
-            tab[productIndex].Quantite = tab[productIndex].Quantite - 1;
-            setProducts(tab);
         };
 
         return (
