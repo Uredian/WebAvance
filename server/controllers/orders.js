@@ -1,42 +1,32 @@
 //Importing model
 const Order = require('../models/orders.js');
-const Product = require('../models/products.js');
+productsController = require('../controllers/products.js');
 
-
+//Call method create of Order's model, decrement quantity of pizzas ordered and handling errors 
 const create = (req, res) => {
-	console.log(req)
-	console.log(req.body)
-	const nouvelle_commande = new Order(req.body);
-	
+	const new_order = new Order(req.body);
+
 	if (req.body.constructor == Object && Object.keys(req.body).length === 0) {
-		res.send({ error: true, message: "Please provide all filed" })
+		res.send({ error: true, message: "Please provide all mandatory filed" })
 	}
 	else {
-		Order.create(nouvelle_commande, function (err, commande) {
-			if (err) {
-				res.send(err);
+		Order.create(new_order, function (error, commande) {
+			if (error) {
+				res.send(error);
 				console.log("erreur de creation de commande")
 			}
 			else {
-				json_commande = JSON.parse(commande["ListeProduits"])
- 
-				if(Object.keys(json_commande).length == 0){
-					res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
-				}
-				else{
-					Object.keys(json_commande).forEach(function (key) {
-					var value = json_commande[key]
+				json_order = JSON.parse(commande["ListeProduits"])
 
-					Product.decrementQuantity(key, value, function (err, product) {
-						if (err) {
-							res.json({ error: true, message: "Erreur lors de l'ajout de votre commande ! ", data: commande })
-							console.log("erreur plus de pizza")
-						}
-						else {
-							res.json({ error: false, message: "Commande bien ajoutée ! ", data: commande })
-						}
+				if (Object.keys(json_order).length == 0) {
+					res.json({ error: false })
+				}
+				else {
+					//ForEach pizza in the order, call decrementQuantity of Product's controller that decrement the number of remaining pizzas
+					Object.keys(json_order).forEach(function (id_pizza) {
+						var numberOfPizzasToBeDecremented = json_order[id_pizza]
+						productsController.decrementQuantity({ "params": { "id": id_pizza, "numberOfPizzasToBeDecremented": numberOfPizzasToBeDecremented } }, res)
 					})
-				})
 				}
 			}
 		})

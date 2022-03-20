@@ -1,6 +1,6 @@
 //Importing model
 const User = require('../models/users.js');
-commandsController = require('./orders.js');
+ordersController = require('./orders.js');
 
 
 //Call method create of User's model, create of order by call of Order's controller and handling errors 
@@ -20,7 +20,7 @@ const create = (req, res) => {
 			}
 			else {
 				console.log("Result of create User", user)
-				commandsController.create({ "body": { "Utilisateur": user.Id, "ListeProduits": ListeProduits, "user": user } }, res)
+				ordersController.create({ "body": { "Utilisateur": user.Id, "ListeProduits": ListeProduits, "user": user } }, res)
 			}
 		})
 	}
