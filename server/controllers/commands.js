@@ -1,6 +1,6 @@
 
 // Récuperation du model 
-const Command = require('../models/commands.js');
+const Command = require('../models/orders.js');
 const Product = require('../models/products.js');
 
 

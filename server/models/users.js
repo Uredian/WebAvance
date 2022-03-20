@@ -34,7 +34,7 @@ User.create = function (newuser, result) {
 			result(null, error)
 		}
 		else {
-			newuser.Id = res.insertId
+			newuser.Id = response.insertId
 			result(null, newuser)
 		}
 	})

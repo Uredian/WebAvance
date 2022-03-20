@@ -1,7 +1,7 @@
 
 // Récuperation du model 
 const Users = require('../models/users.js');
-const Command = require('../models/commands.js');
+const Command = require('../models/orders.js');
 const Product = require('../models/products.js');
 commandsController = require('../controllers/commands.js');
 
