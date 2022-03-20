@@ -1,81 +1,52 @@
-# ExpressJS Starter Kit
+# PizzaLoca Server Part
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/56aeba074ae7160d4c9a/maintainability)](https://codeclimate.com/github/Mikescops/expressjs-starter-kit/maintainability)
+### Definition
+This part corresponds to the server part of the "PizzaLoca" web project.
+This server will allow : 
+- retrieve the list of all the pizzas with their quantities, prices, representations and descriptions by following the following url => http://localhost:3001/products/a
+- retrieve information about a pizza => http://localhost:3001/produits/id_de_la_pizza
+- create a user and create an order by making a POST request => http://localhost:3001/utilisateurs/create
+- to see the information relative to a user by following the following url =>  http://localhost:3001/utilisateurs/id_utilisateur
+- to get the list and information of all users => http://localhost:3001/utilisateurs/a
+- to get the list and the information of all the commands => http://localhost:3001/commandes/a
+- to see the information about an order by following this url =>  http://localhost:3001/commandes/id_commande
 
-This project suggest a MVC (model - view - controller) architecture for an ExpressJS project.
-It uses MongoDB to store data as well as Nunjucks for templating.
+### Tech
 
-## Project structure
+The server uses a number of open source projects to work properly:
+- [node.js] - evented I/O for the backend
+- [Express] - fast node.js network app framework [@tjholowaychuk]
+- [Gulp] - the streaming build system
 
-```
-|-- app.js (main script to start the app)
-|-- package.json (metadata and dependencies)
-|-- gulpfile.js (specify files to watch)
-|-- models
-	|-- db.js (to connect to database)
-	|-- users.js (define users contenttype)
-|-- routes
-	|-- index.js (define route to homepage)
-	|-- users.js (define routes to users pages)
-|-- controllers
-	|-- index.js (handle response for homepage)
-	|-- users.js (handle response for users contenttype)
-|-- views
-	|-- users (templates for users contenttype)
-	|-- partials (templates called with 'include')
-	|-- layout (templates called with 'extends')
-	|-- something.html (any template used by Nunjucks)
-	|-- ...
-|-- public
-	|-- assets (any css, js or img that need to be publicly accessible)
+### Installation
+The server part must have **nodejs and mysql** to work 
+Please verify by the following line : 
+```sh 
+node --version && mysql --version
 ```
 
-## Installation
+Configure your database in the file `models/db.js` : Change the user and the password 
+```js
+const dbConn = mysql.createConnection(
+  {  host     : 'localhost', 
+  user     : 'user', 
+  password : 'azerty', 
+  database : 'web'});
+```
 
-You must have **nodejs and mongodb** installed on your system, verify with :
+Create a database `"web"` and import `web.sql`
 
-`node --version && mongo --version`
+Go into root folder of the server and enter the following lines : 
+```sh
+npm install
+npm run assets:build
+```
+You can now start your server by : 
+```sh
+npm run start
+```
 
-Go into root folder and enter the following line in your terminal :
+### 
 
-`npm install`
-
-## Launch project
-
-You can build assets with
-
-`npm run assets:build`
-
-then you may start the project with
-
-`npm run start`
-
-or use Gulp automation so that any modifications to files will minify assets and reload the app :
-
-`npm run assets:watch`
-
-Your project is accessible at [localhost:3000](http://localhost:3000).
-
-## About design
-
-The administrative panel template is from [Ad.min](https://github.com/Mikescops/ad.min) which is a minimal admin template.
-
-## Various documentation
-
-- ExpressJS : https://expressjs.com/en/starter/hello-world.html
-- Mongoose (mongodb object modeling for nodejs) : https://mongoosejs.com/docs/
-- Nunjucks (mozilla templating for nodejs) : https://mozilla.github.io/nunjucks/templating.html
-- GulpJS (development automation) : https://gulpjs.com/
-- FontAwesome (icons font) : https://fontawesome.com/icons
-- Kacole2's skeleton (inspiration of this project) : https://git.io/fxQXK
-
-## Contributing
-
-Feel free to contribute to this project, fork and pull request your ideas.
-Don't include work that is not open source or not from you.
-
-## Authors
-
-| [![twitter/mikescops](https://avatars0.githubusercontent.com/u/4266283?s=100&v=4)](http://twitter.com/mikescops "Follow @mikescops on Twitter") |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Corentin Mors](https://pixelswap.fr/)                                                                                                          |
+### Reference 
+based on project **ExpressJS Starter Kit**" by | [Corentin Mors](https://pixelswap.fr/)
