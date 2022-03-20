@@ -56,7 +56,7 @@ Product.decrementQuantity = function (id, numberOfPizzasToBeDecremented, result)
 }
 
 //Method to find a product by it's id
-Product.FindById = function (id, result) {
+Product.findById = function (id, result) {
 	let query_get_quantity = dbConn.query("SELECT * FROM Produit WHERE Reference=?", [id], function (error, response) {
 		if (error) {
 			console.log("error = ", error)
