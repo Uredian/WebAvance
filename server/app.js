@@ -15,14 +15,14 @@ app.get("/",(req,res)=>{
 })
 
 const routes_produits=require("./routes/products.js")
-const routes_commands=require("./routes/commands.js")
+const routes_commandes=require("./routes/orders.js")
 const routes_users=require("./routes/users.js")
 
 // Load DB connection
 const db = require('./models/db');
 
 app.use("/produits",routes_produits)
-app.use("/commandes",routes_commands)
+app.use("/commandes",routes_commandes)
 app.use("/utilisateurs",routes_users)
 
 app.listen(port,()=> {
