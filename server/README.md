@@ -40,12 +40,15 @@ Go into root folder of the server and enter the following lines :
 ```sh
 npm install
 npm run assets:build
+npm install mysql
+npm install cors
 ```
 You can now start your server by : 
 ```sh
 npm run start
 ```
-
+En cas d'erreur, pensez à modifier le systeme d'autentification de la base de donnée mysql 
+`ALTER USER 'user'@'localhost' IDENTIFIED  BY 'password';`
 ### 
 
 ### Reference 
