@@ -36,7 +36,7 @@ const dbConn = mysql.createConnection(
 
 Create a database `"web"` and import `web.sql`
 
-Go into root folder of the server and enter the following lines : 
+Go into root folder of the server and enter the following lines :  // je pense que ces lignes sont inutiles à partir du moment où l'on fait un npm ci ou npm install avant
 ```sh
 npm install
 npm run assets:build

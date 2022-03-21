@@ -9,64 +9,64 @@ var Product = function (product) {
 	this.Prix = product.Prix;
 	this.Quantité = product.Quantité;
 	this.Image = product.Image;
-}
+};
 
 //Method to find all products
 Product.findAll = function (result) {
-	let query = dbConn.query("SELECT * FROM Produit", function (error, response) {
+	let query = dbConn.query("SELECT * FROM produit", function (error, response) {
 		if (error) {
-			console.log("error = ", error)
-			result(null, error)
+			console.log("error = ", error);
+			result(null, error);
 		}
 		else {
-			result(null, response)
+			result(null, response);
 		}
-	})
-}
+	});
+};
 
 //Method that allows to decrement the quantity of a pizza identified by its id of numberOfPizzasToBeDecremented
 Product.decrementQuantity = function (id, numberOfPizzasToBeDecremented, result) {
-	currentQuantity = 0
-	let query_get_quantity = dbConn.query("SELECT Quantite FROM Produit WHERE Reference=?", [id], function (error, response) {
+	currentQuantity = 0;
+	let query_get_quantity = dbConn.query("SELECT Quantite FROM produit WHERE Reference=?", [id], function (error, response) {
 		if (error) {
-			console.log("error = ", error)
-			result(null, error)
+			console.log("error = ", error);
+			result(null, error);
 		}
 		else {
 
-			currentQuantity = response[0].Quantite
-			quantityAfterDecrementation = currentQuantity - numberOfPizzasToBeDecremented
+			currentQuantity = response[0].Quantite;
+			quantityAfterDecrementation = currentQuantity - numberOfPizzasToBeDecremented;
 
 			if (quantityAfterDecrementation <= 0) {
-				result("ERROR : The pizza is no longer available !!", null)
+				result("ERROR : The pizza is no longer available !!", null);
 			}
 			else {
-				let query = dbConn.query("UPDATE Produit SET Quantite=? WHERE Reference=?", [quantityAfterDecrementation, id], function (error, response) {
+				let query = dbConn.query("UPDATE produit SET Quantite=? WHERE Reference=?", [quantityAfterDecrementation, id], function (error, response) {
 					if (error) {
-						console.log("error = ", error)
-						result(null, error)
+						console.log("error = ", error);
+						result(null, error);
 					}
 					else {
-						result(null, response)
+						result(null, response);
 					}
-				})
+				});
 			}
 		}
-	})
-}
+	});
+};
 
 //Method to find a product by it's id
 Product.findById = function (id, result) {
-	let query_get_quantity = dbConn.query("SELECT * FROM Produit WHERE Reference=?", [id], function (error, response) {
+	let query_get_quantity = dbConn.query("SELECT * FROM produit WHERE Reference=?", [id], function (error, response) {
 		if (error) {
-			console.log("error = ", error)
-			result(null, error)
+			console.log("error = ", error);
+			result(null, error);
 		}
 		else {
-			result(null, response)
+			result(null, response);
 		}
-	})
-}
+	});
+};
 
 
 module.exports = Product;
